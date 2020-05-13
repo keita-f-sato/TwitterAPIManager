@@ -1,0 +1,109 @@
+
+{% extends "layout.html" %}
+{% block content %}
+<div class="container">
+    <nav aria-label="パンくずリスト">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/users">ホーム</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Twitter設定</li>
+        </ol>
+    </nav>
+    <form action="/twconfig/?twid={{twid}}" method="post">
+      {{ form.csrf_token }}
+      <div class="btn-group" role="group" aria-label="基本のボタングループ">
+        {% if status %}
+        <input class="btn btn-dark disabled" type="submit" name="stat" value="start"></button>
+        <input class="btn btn-primary " type="submit" name="stat" value="stop"></button>
+        {% else %}
+        <input class="btn btn-primary " type="submit" name="stat" value="start"></button>
+        <input class="btn btn-dark disabled" type="submit" name="stat" value="stop"></button>
+        {% endif %}
+      </div>      
+    </form>
+    <div class="row">
+    <div>
+        <h1 class="mt-5">現在の設定</h1>
+            <br/>
+            <div>
+                {% if status%}
+                    <h3><p>ステータス：<span style="color: dodgerblue">稼働中</span></p></h3>
+                {% else %}
+                    <h3><p>ステータス：<spn style="color: darkgray;">停止中</spn></p></h3>
+                {% endif %}
+            </div>
+            <div>
+                <h4>Twitter ID</h4>
+                <p>&emsp;{{twid}}</p>
+            </div>
+            <div>
+                <h4>最大送信メッセージ数</h4>
+                <p>&emsp;{{max_send_message}}</p>
+            </div>
+            <div>
+                <h4>メッセージ</h4>
+                <p>
+                    &emsp;{{direct_messages1}}<br/>
+                    &emsp;{{direct_messages2}}<br/>
+                    &emsp;{{direct_messages3}}
+                </p>
+            </div>
+            <div>
+                <h4>いいねキーワード</h4>
+                <p>&emsp;{{like_keyword}}</p>
+            </div>
+            <div>
+                <h4>最大自動いいね数</h4>
+                <p>&emsp;{{max_like}}</p>
+            </div>
+            <div>
+                <h4>フォローキーワード</h4>
+                <p>&emsp;{{follow_keyword}}</p>
+            </div>
+            <div>
+                <h4>最大自動フォロー数</h4>
+                <p>&emsp;{{max_follow}}</p>
+            </div>
+    </div>
+    <div class="container-narrow">
+        <h1 class="mt-5">Register</h1>
+            <br/>
+            <form id="registerForm" class="form form-register" style="width: 130%;" method="POST" action="" role="form">
+                {{ form.csrf_token }}
+                    <div class="form-group">
+                        最大送信メッセージ数
+                        {{form.max_send_message(placeholder="数字を入れてください", class_="form-control")}}
+                    </div>
+                    <div class="form-group">
+                        定型メッセージ
+                        {{form.direct_messages1(placeholder="メッセージを入れてください", class_="form-control")}}
+                    </div>
+                    <div class="form-group">
+                        定型メッセージ
+                        {{form.direct_messages2(placeholder="メッセージを入れてください", class_="form-control")}}
+                    </div>
+                    <div class="form-group">
+                        定型メッセージ
+                        {{form.direct_messages3(placeholder="メッセージを入れてください", class_="form-control")}}
+                    </div>
+                    <div class="form-group">
+                        いいねをするキーワード
+                        {{form.like_keyword(placeholder="キーワードを入れてください", class_="form-control")}}
+                    </div>
+                    <div class="form-group">
+                        最大いいね数
+                        {{form.max_like(placeholder="数字を入れてください", class_="form-control")}}
+                    </div>
+                    <div class="form-group">
+                        フォローをするキーワード
+                        {{form.follow_keyword(placeholder="キーワードを入れてください", class_="form-control")}}
+                    </div>
+                    <div class="form-group">
+                        最大フォロー数
+                        {{form.max_follow(placeholder="数字を入れてください", class_="form-control")}}
+                    </div>
+                    <p><input class="btn btn-primary" type="submit" value="登録する"></p>
+            </form>
+    </div>
+    </div>
+</div>
+{% endblock %}

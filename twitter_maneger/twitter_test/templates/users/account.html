@@ -1,0 +1,36 @@
+
+{% extends "layout.html" %}
+{% block content %}
+<nav aria-label="パンくずリスト">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/users">ホーム</a></li>
+      <li class="breadcrumb-item active" aria-current="page">ユーザー設定</li>
+    </ol>
+</nav>
+<div class="container">
+    <div class="jumbotron">jumbotron
+        <div>
+            <h2>アカウント情報</h2>
+            <div class="list-group" style="max-width: 400px;">
+                <li class="list-group-item">ユーザー名：{{current_user.username}}</li>
+                <li class="list-group-item">ユーザーEmail：{{current_user.email}}</li>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <h3>管理者専用メニュー</h3>
+    ユーザー作成証人待ちリスト
+    <div class="list-group" style="max-width: 400px;">
+        <form id="registerForm" class="form form-register" style="width: 100%;" method="POST" action="" role="form">
+            {{ form.csrf_token }}
+            {% for name, email in que %}
+            <li class="list-group-item">{{ name }}　 {{ email }}　{{ form|attr(name)() }}</li>
+            </br>
+            {% endfor %}
+            <p><input class="btn btn-primary" type="submit" value="承認する"></p>
+        </form>
+    </div>
+</div>
+{% endblock %}
+

@@ -1,0 +1,30 @@
+
+{% extends "layout.html" %}
+{% block content %}
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron">
+    <div class="container">
+    
+      <h1 class="display-3">twitter管理アプリ</h1>
+    
+      <p>Twitterの管理とメッセージ送信自動化アプリ</p>
+      <p>
+        {% if current_user and current_user.is_authenticated %}
+          <a class="btn btn-primary" href="/users" role="button">Twitterアカウント一覧を表示</a>
+        {% else %}
+          <form class="form-inline" id="loginForm" method="POST" action="/" role="login">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+            <div class="input-group mb-2 mr-sm-2">
+              {{ form.username(placeholder="Username", class_="form-control mr-sm-1 my-auto") }} {{ form.password(placeholder="Password",
+              class_="form-control mr-sm-1 my-auto") }}
+              <button class="btn btn-light btn-primary m-auto" type="submit">Login</button>
+            </div>
+          </form>
+        {% endif %}
+      </p>
+      <!-- <p><a href="" class="btn btn-primary btn-large">アカウントを作成する &raquo;</a></p> -->
+    </div>
+</div><!-- /.jumbotron -->
+
+{% endblock %}
+

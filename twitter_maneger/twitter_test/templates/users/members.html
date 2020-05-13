@@ -1,0 +1,33 @@
+
+{% extends "layout.html" %}
+{% block content %}
+<div class="jumbotron">
+    <div class="container">
+        <div class="row">
+            <div class="mx-5">
+                <h3>アカウント一覧</h3>
+                <div class="list-group" style="max-width: 400px;">
+                    {% for id in twitterids %}
+                    <a href="/twconfig/?twid={{ id }}" class="list-group-item list-group-item-action">{{ id }}</a>
+                    {% endfor %}
+                </div>
+                </br>
+                <p><a href="/twitter" class="btn btn-primary btn-large">twitter情報を登録する &raquo;</a></p>
+            </div>
+            <div class="mx-5">
+                <h3>可動アカウント一覧</h3>
+                <div class="list-group" style="max-width: 400px;">
+                    {% for status, id in twitter_inf%}
+                        {% if status%}
+                            <li class="list-group-item list-group-item-primary">{{ id }} : 可動中</li>
+                        {% else %}
+                            <li class="list-group-item list-group-item-warning">{{ id }} : 停止</li>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
